@@ -20,4 +20,4 @@ RUN make install
 WORKDIR /app
 RUN steamcmd +login anonymous +app_update 1829350 +quit
 
-ENTRYPOINT [ "wine64" ]
+ENTRYPOINT [ "/bin/sh" ]
