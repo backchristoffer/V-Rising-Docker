@@ -1,23 +1,10 @@
-FROM steamcmd/steamcmd:centos-8
+FROM steamcmd/steamcmd:ubuntu-20
 WORKDIR /app
+ARG DEBIAN_FRONTEND=noninteractive
 
-RUN dnf -y install wget
-RUN dnf -y update && \
-    dnf -y groupinstall 'Development Tools' && \
-    dnf -y install libX11-devel zlib-devel libxcb-devel \
-    libxslt-devel libgcrypt-devel libxml2-devel gnutls-devel \
-    libpng-devel libjpeg-turbo-devel libtiff-devel \
-    dbus-devel fontconfig-devel freetype-devel 
+RUN apt-get -y update
+RUN apt-get install -y wget wine xserver-xorg xvfb && apt-get -y update
 
-RUN wget https://dl.winehq.org/wine/source/5.x/wine-5.1.tar.xz
-RUN tar -Jxf wine-5.1.tar.xz
+RUN steamcmd +login anonymous +force_install_dir /app +app_update 1829350 +quit
 
-WORKDIR /app/wine-5.1
-RUN ./configure --enable-win64
-RUN make
-RUN make install
-
-WORKDIR /app
-RUN steamcmd +login anonymous +app_update 1829350 +quit
-
-ENTRYPOINT [ "/bin/sh" ]
+ENTRYPOINT Xvfb :0 -screen 0 1024x768x16 & DISPLAY=:0.0 wine64 /app/VRisingServer.exe
