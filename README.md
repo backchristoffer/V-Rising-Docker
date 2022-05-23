@@ -1,5 +1,8 @@
-# v_rising_docker
+# V Rising Docker
 Docker image running V Rising
+Uses steamcmd/steamcmd:ubuntu-20 as a base. Launches V Rising Server using Wine. 
+
+Using this as more of an example of how you could use this. The entrypoint could be done with a script instead.
 
 ## Run example
 ~~~~
