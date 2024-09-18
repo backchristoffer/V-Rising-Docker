@@ -6,5 +6,5 @@ Using this as more of an example of how you could use this. The entrypoint could
 
 ## Run example
 ~~~~
-# docker run -d -p 27015:27015 -p 27016:27016 --name vrising1 vrising
+# docker run -d -p 27015:27015/udp -p 27016:27016/udp --name v-rising-server v-rising-server
 ~~~~
